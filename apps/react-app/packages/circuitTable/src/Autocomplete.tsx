@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import './autocomplete.css';
 
-export const AutoComplete: React.FC<{ curcuitName: string[] }> = (props) => {
-    const options = [...props.curcuitName];
+export interface AutoCompleteProps {
+    curcuitName: Array<{ id: string; name: string }>;
+}
+
+export const AutoComplete: React.FC<AutoCompleteProps> = ({ curcuitName }) => {
     const [display, setDisplay] = useState<boolean>(false);
     const [search, setSearch] = useState<string>('');
 
@@ -11,13 +14,7 @@ export const AutoComplete: React.FC<{ curcuitName: string[] }> = (props) => {
         setDisplay(false);
     };
 
-    let key = 0;
-
-    const filter = (value: React.ChangeEvent<HTMLInputElement>) => {
-        setSearch(value.target.value);
-    };
-
-    const listResult: string[] = options.filter((name) => {
+    const listResult: string[] = curcuitName.filter((name) => {
         return name.toLowerCase().indexOf(search.toLowerCase()) > -1;
     });
 
@@ -27,15 +24,17 @@ export const AutoComplete: React.FC<{ curcuitName: string[] }> = (props) => {
                 type="text"
                 value={search}
                 placeholder="Type"
-                onChange={(e) => filter(e)}
+                onChange={(e) => {
+                    setSearch(e.target.value);
+                }}
                 onFocus={() => setDisplay(!display)}
             />
             {display && listResult.length > 0 && (
                 <ul className="autocomplete__list">
-                    {listResult.map((name: string) => {
+                    {listResult.map((name: string, index: number) => {
                         return (
                             // eslint-disable-next-line no-plusplus
-                            <li key={key++} onClick={() => setInput(name)}>
+                            <li key={index} onClick={() => setInput(name)}>
                                 {name}
                             </li>
                         );
@@ -44,7 +43,7 @@ export const AutoComplete: React.FC<{ curcuitName: string[] }> = (props) => {
             )}
             {display && listResult.length === 0 && (
                 <ul className="autocomplete__list">
-                    <li>Нет результатов</li>
+                    <li>Упс</li>
                 </ul>
             )}
         </div>
