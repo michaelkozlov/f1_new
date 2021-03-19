@@ -1,2 +1,1 @@
-export * from './CircuitTable';
-export * from './Autocomplete';
+export * from './circuit-table/CircuitTable';

@@ -1,0 +1,19 @@
+{
+    "name": "@react-app/currentSeason",
+    "version": "1.0.0",
+    "private": true,
+    "main": "src/index.ts",
+    "scripts": {
+        "test": "jest"
+    },
+    "peerDependencies": {
+        "react": "*",
+        "react-dom": "*",
+        "react-router-dom": "*",
+        "react-test-renderer": "*"
+    },
+    "dependencies": {
+        "@material-ui/core": "^4.11.3",
+        "@material-ui/data-grid": "^4.0.0-alpha.22"
+    }
+}

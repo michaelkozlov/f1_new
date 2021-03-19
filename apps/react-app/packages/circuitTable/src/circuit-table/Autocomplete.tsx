@@ -14,8 +14,16 @@ export const AutoComplete: React.FC<AutoCompleteProps> = ({ curcuitName }) => {
         setDisplay(false);
     };
 
-    const listResult: string[] = curcuitName.filter((name) => {
-        return name.toLowerCase().indexOf(search.toLowerCase()) > -1;
+    interface ListResultObj {
+        id: string;
+        name: string;
+    }
+
+    const listResult = curcuitName.filter((obj): ListResultObj | boolean => {
+        if (obj.name.toLowerCase().indexOf(search.toLowerCase()) > -1) {
+            return obj;
+        }
+        return false;
     });
 
     return (
@@ -31,11 +39,10 @@ export const AutoComplete: React.FC<AutoCompleteProps> = ({ curcuitName }) => {
             />
             {display && listResult.length > 0 && (
                 <ul className="autocomplete__list">
-                    {listResult.map((name: string, index: number) => {
+                    {listResult.map((obj) => {
                         return (
-                            // eslint-disable-next-line no-plusplus
-                            <li key={index} onClick={() => setInput(name)}>
-                                {name}
+                            <li key={obj.id} onClick={() => setInput(obj.name)}>
+                                {obj.name}
                             </li>
                         );
                     })}

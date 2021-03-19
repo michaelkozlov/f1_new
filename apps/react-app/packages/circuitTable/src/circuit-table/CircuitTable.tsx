@@ -1,34 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { DataGrid, GridColDef } from '@material-ui/data-grid';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { AutoComplete } from './Autocomplete';
-import './CircuitTable.css';
 import useCircuitData from './useCircuitData';
-import { CircularProgress } from '@material-ui/core';
 
-const useStyles = makeStyles(({ palette }) => ({
-    root: {
-        background: 'white',
-        border: 'none',
-        '& .MuiDataGrid-colCellTitle': {
-            fontWeight: 700,
-            color: '#fff',
+const useStyles = makeStyles(() =>
+    createStyles({
+        root: {
+            background: 'white',
+            border: 'none',
+            '& .MuiDataGrid-colCellTitle': {
+                fontWeight: 700,
+                color: '#fff',
+            },
+            '& .MuiDataGrid-colCellWrapper': {
+                background: '#31334a',
+            },
+            '& .MuiDataGrid-footer, .MuiTablePagination-root': {
+                background: '#31334a',
+                color: '#fff',
+            },
         },
-        '& .MuiDataGrid-colCellWrapper': {
-            background: '#31334a',
+        circuitTable: {
+            display: 'flex',
+            width: '100%',
+            justifyContent: 'space-around',
         },
-        '& .MuiDataGrid-footer, .MuiTablePagination-root': {
-            background: palette.primary,
-            color: '#fff',
-        },
-    },
-    table: {
-        display: 'flex',
-        width: '100%',
-        justify-content: 'space-around',
-    },
-    
-}));
+    }),
+);
 
 const columns: GridColDef[] = [
     {
@@ -56,17 +55,26 @@ export interface CircuitTableProps {
     pageSize?: number;
 }
 
-export const CircuitTable: React.FC<CircuitTableProps> = ({ showProgress: shoProgress, pageSize }) => {
+interface CircuitTableDataAutocomplete {
+    id: string;
+    name: string;
+}
+
+export const CircuitTable: React.FC<CircuitTableProps> = () => {
     const data = useCircuitData();
     const classes = useStyles();
 
-    if (data.loading) {
-        return <CircularProgress />;
-    }
-
     return (
-        <div className="circuit-table">
-            <AutoComplete curcuitName={data.data.map((name) => name.circuitName)} />
+        <div className={classes.circuitTable}>
+            <AutoComplete
+                curcuitName={data.data.map((item) => {
+                    const obj: CircuitTableDataAutocomplete = {
+                        id: item.id,
+                        name: item.circuitName,
+                    };
+                    return obj;
+                })}
+            />
             <div style={{ width: '50%' }}>
                 <DataGrid
                     className={classes.root}

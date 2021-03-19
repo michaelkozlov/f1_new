@@ -1,0 +1,34 @@
+export interface DataConstructors {
+    MRData: MRData;
+}
+export interface MRData {
+    xmlns: string;
+    series: string;
+    url: string;
+    limit: string;
+    offset: string;
+    total: string;
+    StandingsTable: StandingsTable;
+}
+export interface StandingsTable {
+    season: string;
+    StandingsLists: StandingsLists[];
+}
+export interface StandingsLists {
+    season: string;
+    round: string;
+    ConstructorStandings: ConstructorStandings[];
+}
+export interface ConstructorStandings {
+    position: string;
+    positionText: string;
+    points: string;
+    wins: string;
+    Constructor: Constructor;
+}
+export interface Constructor {
+    constructorId: string;
+    url: string;
+    name: string;
+    nationality: string;
+}
