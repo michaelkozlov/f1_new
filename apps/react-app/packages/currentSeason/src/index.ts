@@ -1,1 +1,1 @@
-export * from './driverTable/DriverTable';
+export * from './Tabs/CurrentSeason';

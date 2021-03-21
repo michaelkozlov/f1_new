@@ -11,8 +11,9 @@ export default function useDriverData() {
         fetchDriverCurrent()
             .then((response) => {
                 setDataDriver(
-                    response.map((el) => {
+                    response.map((el, index) => {
                         return {
+                            id: index,
                             position: el.position,
                             racer: `${el.Driver.givenName} ${el.Driver.familyName}`,
                             constructor: el.Constructors[0].name,

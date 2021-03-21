@@ -45,21 +45,10 @@ a:visited:hover {
     display: flex;
     width: 90%;
     justify-content: center;
-    align-items: flex-start;
 }
 
 .h1_main_content {
     color: #d4d5d8;
-}
-
-.ant-tabs-card > .ant-tabs-nav .ant-tabs-tab-active,
-.ant-tabs-card > div > .ant-tabs-nav .ant-tabs-tab-active {
-    color: gold;
-    background: #fff;
-}
-
-.ant-table-row .ant-table-row-level-0 {
-    font-weight: bold;
 }
 
 .select_season {
@@ -101,6 +90,7 @@ a:visited:hover {
     width: 100%;
     margin-top: 20px;
     display: flex;
+    justify-content: center;
 }
 
 .next-race {

@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import { CircuitTable } from '@react-app/circuitTable';
+// import { CircuitTable } from '@react-app/circuitTable';
+import { CurrentSeason } from '@react-app/currentSeason';
 import Header from './Components/Header/Header';
 import LeftSidebar from './Components/LeftSidebar/LeftSidebar';
 
@@ -14,7 +15,7 @@ function App() {
                 </div>
                 <div className="main-content">
                     <div className="main-content-wrapper">
-                        <CircuitTable />
+                        <CurrentSeason />
                     </div>
                 </div>
             </div>
